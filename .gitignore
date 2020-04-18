@@ -28,7 +28,7 @@ hs_err_pid*
 #数据库配置文件
 loveqqsqlonfig.properties
 /.idea
-#*.iml
+*.iml
 /out
 /target
 
