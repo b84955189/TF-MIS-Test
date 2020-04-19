@@ -12,22 +12,56 @@ import java.util.List;
  * @describe:
  */
 public interface UserDaoInterface {
-     /*
-      增
-     */
+     /**
+      * 用户添加
+      * @author Jason
+      * @date 5:30 PM 4/19/2020
+      * @param  user 用户实体
+      * @return true:成功 false:失败
+      * @throws SQLException
+      */
      public boolean addUser(User user) throws SQLException;
-    /*
-      删
+    /**
+     * 用户删除
+     * @author Jason
+     * @date 5:31 PM 4/19/2020
+     * @param  id 用户标识
+     * @return true:成功 false:失败
+     * @throws SQLException
      */
     public boolean delUser(int id) throws SQLException;
-    /*
-      改
-     */
+   /**
+    * 用户信息更新
+    * @author Jason
+    * @date 5:31 PM 4/19/2020
+    * @param  newUser 新用户信息实体
+    * @return true:成功 false:失败
+    */
     public boolean updateUser(User newUser);
-    /*
-      查
+    /**
+     * 总体用户信息查询
+     * @author Jason
+     * @date 5:32 PM 4/19/2020
+     * @param
+     * @return 返回用户信息集合
+     * @throws SQLException
      */
     public List<User> queryAll() throws SQLException;
+    /**
+     * 模糊查询用户信息
+     * @author Jason
+     * @date 5:33 PM 4/19/2020
+     * @param  snapshot
+     * @return 返回用户信息集合
+     * @throws SQLException
+     */
     public List<User> queryAll(String snapshot) throws SQLException;
+    /**
+     * 单个用户信息查询
+     * @author Jason
+     * @date 5:34 PM 4/19/2020
+     * @param  userName 用户名
+     * @return 返回用户实体对象
+     */
     public User queryUser(String userName) throws SQLException;
 }

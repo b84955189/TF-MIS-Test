@@ -4,10 +4,10 @@ package top.lking.bean;
 
 
 /**
+ * 用户实体类
  * @author Jason
  * @version 1.0
  * @date 4/2/2020 10:24 PM
- * @describe:lq_user table
  */
 
 public class User {
@@ -19,7 +19,6 @@ public class User {
     private String user_register_time;
     private String display_name;
     private String user_head_url;
-
     public Integer getOnline_sign() {
         return online_sign;
     }

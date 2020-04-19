@@ -1,7 +1,4 @@
-<%@ page import="top.lking.utils.R" %><%--
-  By: Jason.
-  Date: 4/7/2020 7:42 PM
---%>
+<%@ page import="top.lking.utils.R" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-cn">
 <head>
@@ -55,3 +52,4 @@
     <script src="${pageContext.request.contextPath}/js/my.js"></script>
 </body>
 </html>
+<%--By: Jason.Date: 3/31/2020 3:33 PM--%>
