@@ -14,12 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * JDBC数据访问层
  * @author Jason
  * @version 1.0
  * @date 4/7/2020 10:36 AM
  * @describe:
  */
 public class UserDao implements UserDaoInterface {
+    /**
+     *
+     * @author Jason
+     * @date 5:29 PM 4/19/2020
+     * @param  user 用户实体类
+     * @return true:成功 false:失败
+     */
     public boolean addUser(User user) throws SQLException {
 
         //获取数据库连接
@@ -35,7 +43,13 @@ public class UserDao implements UserDaoInterface {
             return false;
         return true;
     }
-
+    /**
+     * 用户删除
+     * @author Jason
+     * @date 5:29 PM 4/19/2020
+     * @param  id 用户标识
+     * @return true:成功 false:失败
+     */
     public boolean delUser(int id) throws SQLException {
         Connection connection=LoveQQDBUtils.getCon();
         PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_DEL_USER_SQL);

@@ -1,10 +1,10 @@
 package top.lking.utils;
 
 /**
+ * 项目全局资源引用类
  * @author Jason
  * @version 1.0
  * @date 4/7/2020 9:54 AM
- * @describe:
  */
 public class R {
     public interface LoveQQSQLConfig{

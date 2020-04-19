@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * JDBC工具类
  * @author Jason
  * @version 1.0
  * @date 4/2/2020 10:27 PM
@@ -43,8 +44,13 @@ public class LoveQQDBUtils {
                         e.printStackTrace();
                 }
         }
-        /*
-            获取连接对象
+        /**
+         * 获取数据库连接对象
+         * @author Jason
+         * @date 5:35 PM 4/19/2020
+         * @param
+         * @return 返回数据库连接对象
+         * @throws SQLException
          */
         public static Connection getCon() throws SQLException {
                 Connection connection=null;
@@ -58,8 +64,13 @@ public class LoveQQDBUtils {
                 System.out.println(connection);
                return connection;
         }
-        /*
-             关闭连接对象
+        /**
+         * 关闭数据库连接对象
+         * @author Jason
+         * @date 5:36 PM 4/19/2020
+         * @param
+         * @return
+         * @throws SQLException
          */
         public static void closeCon() throws SQLException {
                 Connection connection=threadLocal.get();
@@ -70,7 +81,14 @@ public class LoveQQDBUtils {
                 }
                 threadLocal.set(null);
         }
-        //Test
+        /**
+         * 开发测试
+         * @author Jason
+         * @date 5:36 PM 4/19/2020
+         * @param  args
+         * @return
+         * @throws SQLException
+         */
         public static void main(String[] args) throws SQLException {
                 Connection connection1=LoveQQDBUtils.getCon();
                 LoveQQDBUtils.closeCon();
