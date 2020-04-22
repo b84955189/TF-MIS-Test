@@ -8,14 +8,6 @@
     response.setHeader("Cache-Control","no-cache");
     response.setDateHeader("Expires", -10);
 
-    //如果没有登陆
-    if(!"1".equals(session.getAttribute("online"))){
-        response.sendRedirect(request.getContextPath());
-        System.out.println();
-
-        return;
-    }
-
     List<User> list=(List<User>) session.getAttribute(R.MesString.DATA_KEY);
 %>
 <html lang="zh-cn">
@@ -33,8 +25,6 @@
 
     <div class="container">
      <jsp:include page="/html/TopPage.html" flush="true"></jsp:include>
-
-<%--        <p id="error_msg" class="display-5" style="color: red;">${sessionScope.session_msg}</p>--%>
 
        <table class="table table-hover table-bordered">
            <thead>

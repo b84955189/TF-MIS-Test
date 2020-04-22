@@ -1,11 +1,5 @@
 <%@ page import="top.lking.utils.R" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    //如果已经登陆
-    if(session.getAttribute("online")!=null)
-        request.getRequestDispatcher(request.getContextPath()+"/show.jsp").forward(request,response);
-%>
 <html lang="zh-cn">
 <head>
 
@@ -20,9 +14,6 @@
     <div class="container">
 
         <jsp:include page="/html/TopPage.html" flush="true"/>
-
-<%--        <p id="error_msg" class="display-5" style="color: red;">${sessionScope.session_msg}</p>--%>
-
 
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="form-group">

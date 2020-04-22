@@ -24,8 +24,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //编码
-        request.setCharacterEncoding("UTF-8");
+
         String userName=null;
         String password=null;
         LoveQQDBControl loveQQDBControl=new LoveQQDBControl();
@@ -53,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
             //如果注册成功
             if(result){
                 request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.REGISTER_SUCCESS_MEG_VALUE);
-                response.sendRedirect(request.getContextPath());
+                response.sendRedirect(request.getContextPath()+R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
                 return;
             }else{
                 request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.REGISTER_FAIL_MEG_VALUE);

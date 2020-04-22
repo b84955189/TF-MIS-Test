@@ -23,8 +23,7 @@ import java.util.List;
 public class TestSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //super.doGet(req, resp);
-        request.setCharacterEncoding("utf-8");
+
         String snapshot=request.getParameter(R.LoveQQSQLConfig.USER_LOGIN);
         if(snapshot==null){
             return;

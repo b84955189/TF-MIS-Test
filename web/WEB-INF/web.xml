@@ -7,6 +7,77 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <!--Filter-->
+
+    <!--全局编码过滤器-->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>top.lking.servlets.filters.EncodingFilter</filter-class>
+        <!--此过滤器开关-->
+        <init-param>
+            <param-name>filterSwitch</param-name>
+            <param-value>on</param-value>
+        </init-param>
+        <!--请求编码-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <!--响应解析编码-->
+        <init-param>
+            <param-name>contentType</param-name>
+            <param-value>text/html;charset=utf-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--登录检测过滤器-->
+    <filter>
+        <filter-name>OfflineFilter</filter-name>
+        <filter-class>top.lking.servlets.filters.OfflineFilter</filter-class>
+        <!--此过滤器开关-->
+        <init-param>
+            <param-name>filterSwitch</param-name>
+            <param-value>on</param-value>
+        </init-param>
+        <!--过滤器页面-->
+        <init-param>
+            <param-name>filterPages</param-name>
+            <param-value>logout;show.jsp</param-value>
+        </init-param>
+        <!--过滤器重定向页面-->
+        <init-param>
+            <param-name>RedirectPage</param-name>
+            <param-value>/index.jsp</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>OfflineFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--在线状态过滤器-->
+    <filter>
+        <filter-name>OnlineFilter</filter-name>
+        <filter-class>top.lking.servlets.filters.OnlineFileter</filter-class>
+        <init-param>
+            <param-name>ForwardPage</param-name>
+            <param-value>/show.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>OnlineFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/register.jsp</url-pattern>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+    <!--Servlet-->
     <servlet>
         <servlet-name>LoginDeal</servlet-name>
         <servlet-class>top.lking.servlets.LoginDealServlet</servlet-class>
