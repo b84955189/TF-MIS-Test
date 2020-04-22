@@ -13,7 +13,7 @@
 <body>
     <div class="container">
 
-        <jsp:include page="/html/TopPage.html" flush="true"/>
+        <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
 
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="form-group">

@@ -29,17 +29,14 @@ public class RegisterServlet extends HttpServlet {
         String password=null;
         LoveQQDBControl loveQQDBControl=new LoveQQDBControl();
 
-        //判断是否已经登录
-        if(request.getSession(true).getAttribute("online")!=null){
-            request.getSession(true).removeAttribute(R.MesString.DATA_KEY);
-
-        }else{
             //判断用户名或密码是否正确
             userName=request.getParameter(R.LoveQQSQLConfig.USER_LOGIN);
             password=request.getParameter(R.LoveQQSQLConfig.USER_PASS);
             //输入错误
             if(userName==null||password==null||userName.trim().equals("")||password.trim().equals("")){
+                //设置错误信息
                 request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.NULL_ERROR_MEG_VALUE);
+                //重定向
                 response.sendRedirect(request.getContextPath()+"/register.jsp");
 
                 return;
@@ -50,17 +47,17 @@ public class RegisterServlet extends HttpServlet {
             user.setUser_pass(password);
             boolean result=loveQQDBControl.add(user);
             //如果注册成功
-            if(result){
+            if (result){
+                //设置成功提示信息
                 request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.REGISTER_SUCCESS_MEG_VALUE);
+                //重定向
                 response.sendRedirect(request.getContextPath()+R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
-                return;
             }else{
+                //设置错误信息
                 request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.REGISTER_FAIL_MEG_VALUE);
+                //重定向
                 response.sendRedirect(request.getContextPath()+"/register.jsp");
-                return;
             }
-        }
-
 
 
 

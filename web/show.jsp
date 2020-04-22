@@ -8,7 +8,7 @@
     response.setHeader("Cache-Control","no-cache");
     response.setDateHeader("Expires", -10);
 
-    List<User> list=(List<User>) session.getAttribute(R.MesString.DATA_KEY);
+    List<User> list=(List<User>) request.getAttribute(R.SessionParamName.DATA_KEY);
 %>
 <html lang="zh-cn">
 <head>
@@ -24,15 +24,15 @@
 <body>
 
     <div class="container">
-     <jsp:include page="/html/TopPage.html" flush="true"></jsp:include>
+     <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
 
        <table class="table table-hover table-bordered">
            <thead>
 
            <hr/>
-           <a href="${pageContext.request.contextPath}/logout"><input type="button" class="btn btn-success" value="注销" style="float: right;"/></a>
+           <a href="<%=request.getContextPath()+R.ServletNames.LOGOUT_SERVLET%>"><input type="button" class="btn btn-success" value="注销" style="float: right;"/></a>
            <div class="search_box">
-               <form action="${pageContext.request.contextPath}/search.do" method="get">
+               <form action="<%=request.getContextPath()+R.ServletNames.SEARCH_SERVLET%>" method="get">
                    <div class="input-group flex-nowrap">
                        <div class="input-group-prepend">
                            <span class="input-group-text">用户名</span>

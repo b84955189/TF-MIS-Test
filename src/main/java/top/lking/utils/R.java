@@ -28,9 +28,9 @@ public class R {
         String QUERY_ALL_USER_SQL="SELECT * FROM "+LQ_USERS;
         String LIMIT_QUERY_ALL_USER_SQL="SELECT * FROM "+LQ_USERS+" WHERE "+USER_LOGIN+" LIKE ?";
     }
+
     public interface MesString{
         String MSG_KEY ="session_msg";
-        String DATA_KEY="data";
         String NULL_ERROR_MEG_VALUE="输入错误！";
         String REGISTER_SUCCESS_MEG_VALUE="注册成功，请登录！";
         String REGISTER_FAIL_MEG_VALUE="注册失败，请重试！";
@@ -40,6 +40,7 @@ public class R {
     }
     public interface SessionParamName{
         String USER="user";
+        String DATA_KEY="data";
     }
     /**
      * 全局过滤器参数名称
@@ -68,7 +69,6 @@ public class R {
      * 全局过滤器参数默认值
      * @author Jason
      * @date 10:00 AM 4/22/2020
-     *
      */
     public interface FilterDefaultParamValue{
         //过滤器开关-关闭状态
@@ -85,8 +85,29 @@ public class R {
         String DEFAULT_FILTER_PAGES="logout;show.jsp";
 
         //在线状态过滤器-默认值
-        String DEFAULT_FORWARD_PAGE="/show.jsp";
+        String DEFAULT_FORWARD_PAGE="/search.do";
 
     }
+    /**
+     * 全局Servlet映射URI名称
+     * @author Jason
+     * @date 8:02 PM 4/22/2020
+     */
+    public interface ServletNames{
+        String LOGIN_SERVLET="/login";
+        String LOGOUT_SERVLET="/logout";
+        String SEARCH_SERVLET="/search.do";
+    }
+    /**
+     * 全局前端页面名称
+     * @author Jason
+     * @date 8:06 PM 4/22/2020
+     */
+    public interface FrontPageNames{
+        String TOP_PAGE="/html/TopPage.html";
 
+        String INDEX_PAGE="/index.jsp";
+        String REGISTER_PAGE="/register.jsp";
+        String SHOW_PAGE="/show.jsp";
+    }
 }

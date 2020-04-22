@@ -18,7 +18,7 @@ import java.io.IOException;
  * @version 1.0
  * @date 4/22/2020 11:53 AM
  */
-public class OnlineFileter implements Filter {
+public class OnlineFilter implements Filter {
     private FilterConfig filterConfig;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,11 +37,17 @@ public class OnlineFileter implements Filter {
         HttpServletResponse response=(HttpServletResponse)servletResponse;
 
         String forwardPage=filterConfig.getInitParameter(R.FilterParamName.FORWARD_PAGE);
+        //Test
+        System.out.println("1");
         //如果用户已经登录
         if (request.getSession(true).getAttribute(R.SessionParamName.USER)!=null){
+            //Test
+            System.out.println("2");
             request.getRequestDispatcher(forwardPage!=null?forwardPage:R.FilterDefaultParamValue.DEFAULT_FORWARD_PAGE).forward(request,response);
             return;
         }
+        //Test
+        System.out.println("OnlineFilter执行了！");
             filterChain.doFilter(request,response);
     }
 

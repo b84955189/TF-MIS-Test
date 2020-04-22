@@ -58,15 +58,17 @@ public class OfflineFilter implements Filter {
         String redirectPage=filterConfig.getInitParameter(R.FilterParamName.REDIRECT_PAGE);
         //如果所访问的页面为过滤页面
         if(isContains(uri,filterPages!=null?filterPages:R.FilterDefaultParamValue.DEFAULT_FILTER_PAGES)){
+
             //如果用户没有登录
             if (request.getSession(true).getAttribute(R.SessionParamName.USER)==null){
+
                 response.sendRedirect(request.getContextPath()+redirectPage!=null?redirectPage:R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
                 return;
             }
 
         }
         //Test
-        System.out.println("AuthFilter执行了！");
+        System.out.println("OfflineFilter执行了！");
         //放行
         filterChain.doFilter(servletRequest,servletResponse);
     }
