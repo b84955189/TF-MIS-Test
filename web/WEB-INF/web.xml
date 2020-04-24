@@ -7,6 +7,13 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <!--HTML引入编码-->
+    <jsp-config>
+        <jsp-property-group>
+            <page-encoding>UTF-8</page-encoding>
+            <url-pattern>*.html</url-pattern>
+        </jsp-property-group>
+    </jsp-config>
     <!--Filter-->
 
     <!--全局编码过滤器-->
