@@ -5,12 +5,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LoadingPage.scss"/>
     <title>欢迎</title>
     <script type="text/javascript">
         var error_msg='${sessionScope.session_msg}';
     </script>
 </head>
 <body>
+
     <div class="container">
 
         <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>

@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LoadingPage.scss"/>
     <title>注册吧，小可爱！</title>
     <script type="text/javascript">
         var context_path='${pageContext.request.contextPath}';

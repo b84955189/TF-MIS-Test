@@ -104,7 +104,8 @@ public class R {
      * @date 8:06 PM 4/22/2020
      */
     public interface FrontPageNames{
-        String TOP_PAGE="/html/TopPage.html";
+        String TOP_PAGE="/html/TopPage.jsp";
+        String LOADING_PAGE="/html/Loading.html";
 
         String INDEX_PAGE="/index.jsp";
         String REGISTER_PAGE="/register.jsp";

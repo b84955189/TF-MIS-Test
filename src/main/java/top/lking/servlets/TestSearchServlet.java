@@ -30,12 +30,13 @@ public class TestSearchServlet extends HttpServlet {
         String snippet=request.getParameter(R.LoveQQSQLConfig.USER_LOGIN);
         //如果没有输入搜索片段---转发完整数据
         if(snippet==null||snippet.trim().equals("")){
-            list.addAll(loveQQDBControl.queryAll(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE));
-        }else{
+            //list.addAll(loveQQDBControl.queryAll(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE));
+            snippet="";
+        }
             //--转发检索数据
             //将数据填充至session
             list.addAll(loveQQDBControl.queryAll(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE,snippet));
-        }
+
         //Test
         System.out.println("搜索模块执行了！");
         //绑定数据

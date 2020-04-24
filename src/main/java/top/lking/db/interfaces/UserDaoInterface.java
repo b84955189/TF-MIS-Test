@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * JDBC数据访问层接口
  * @author Jason
  * @version 1.0
  * @date 4/7/2020 10:38 AM
@@ -38,15 +39,7 @@ public interface UserDaoInterface {
     * @return true:成功 false:失败
     */
     public boolean updateUser(User newUser);
-    /**
-     * 总体用户信息查询
-     * @author Jason
-     * @date 5:32 PM 4/19/2020
-     * @param
-     * @return 返回用户信息集合
-     * @throws SQLException
-     */
-    public List<User> queryAll() throws SQLException;
+
     /**
      * 模糊查询用户信息
      * @author Jason
