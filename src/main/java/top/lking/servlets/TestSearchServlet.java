@@ -1,6 +1,6 @@
 package top.lking.servlets;
 
-import top.lking.bean.User;
+import top.lking.bean.Page;
 import top.lking.db.control.LoveQQDBControl;
 import top.lking.db.interfaces.LoveQQDBControlInterface;
 import top.lking.utils.R;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
+ * 信息搜索模块
  * @author Jason
  * @version 1.0
  * @date 4/14/2020 7:38 PM
@@ -23,19 +23,19 @@ import java.util.List;
 public class TestSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //super.doGet(req, resp);
-        request.setCharacterEncoding("utf-8");
-        String snapshot=request.getParameter(R.LoveQQSQLConfig.USER_LOGIN);
-        if(snapshot==null){
-            return;
-        }
+
+        Page page=null;
         LoveQQDBControl loveQQDBControl = new LoveQQDBControl();
-        //将数据填充至session
-        List<User> list=loveQQDBControl.queryAll(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE,snapshot);
-        request.getSession(true).removeAttribute(R.MesString.DATA_KEY);
-        request.getSession(true).setAttribute(R.MesString.DATA_KEY,list);
+        String snippet=request.getParameter(R.RequestParamName.TYPE_USER_LOGIN);
+        String currentCountString=request.getParameter(R.RequestParamName.PAGE_COUNT);
+        page=loveQQDBControl.paginationQuery(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE,snippet,currentCountString);
+
+
+
+        //绑定数据
+        request.setAttribute(R.RequestParamName.CURRENT_DATA,page);
         //转发至展示页
-        response.sendRedirect(request.getContextPath()+"/show.jsp");
+        request.getRequestDispatcher(request.getContextPath()+R.FrontPageNames.SHOW_PAGE).forward(request,response);
     }
 
     @Override

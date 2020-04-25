@@ -1,28 +1,21 @@
 <%@ page import="top.lking.utils.R" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    //如果已经登陆
-    if(session.getAttribute("online")!=null)
-        request.getRequestDispatcher(request.getContextPath()+"/show.jsp").forward(request,response);
-%>
 <html lang="zh-cn">
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LoadingPage.scss"/>
     <title>欢迎</title>
     <script type="text/javascript">
         var error_msg='${sessionScope.session_msg}';
     </script>
 </head>
 <body>
+
     <div class="container">
 
-        <jsp:include page="/html/TopPage.html" flush="true"/>
-
-<%--        <p id="error_msg" class="display-5" style="color: red;">${sessionScope.session_msg}</p>--%>
-
+        <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
 
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="form-group">
