@@ -13,7 +13,6 @@ import java.util.Properties;
  * @author Jason
  * @version 1.0
  * @date 4/2/2020 10:27 PM
- * @describe:
  */
 public class LoveQQDBUtils {
         private static String driver=null;

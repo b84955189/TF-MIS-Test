@@ -1,4 +1,13 @@
+//显示提示信息
 showMsg();
+//Loading页面
+document.onreadystatechange=function () {
+          if (document.readyState=="complete"){
+               loadingFade();
+          }
+}
+
+
 function cleanError() {
      var errorMsg=document.getElementById("error_msg");
      errorMsg.innerHTML="";
@@ -33,4 +42,21 @@ function confirmPassword() {
 }
 function showMsg() {
      document.getElementById('error_msg').innerHTML=error_msg;
+}
+
+function loadingFade() {
+     var opacity=1;
+     var loadingPage=document.getElementById('loading');
+     var loadingBackground=document.getElementById('loading_bg');
+     var time=setInterval(function () {
+          if (opacity<=0){
+               clearInterval(time);
+               loadingPage.remove();
+          }
+
+          loadingBackground.style.opacity=opacity;
+          opacity-=0.4;
+     },100);
+
+
 }

@@ -1,5 +1,7 @@
 package top.lking.servlets;
 
+import top.lking.utils.R;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,6 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession(true).invalidate();
-        resp.sendRedirect(req.getContextPath());
+        resp.sendRedirect(req.getContextPath()+ R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
     }
 }

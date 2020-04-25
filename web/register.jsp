@@ -4,18 +4,17 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LoadingPage.scss"/>
     <title>注册吧，小可爱！</title>
     <script type="text/javascript">
         var context_path='${pageContext.request.contextPath}';
         var error_msg='${sessionScope.session_msg}';
-
     </script>
 </head>
 <body>
     <div class="container">
-        <jsp:include page="/html/TopPage.html" flush="true"></jsp:include>
+        <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
 
-<%--        <p id="error_msg" class="display-5" style="color: red;">${sessionScope.session_msg}</p>--%>
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="form-group">
                 <div class="form-row">

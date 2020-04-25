@@ -1,6 +1,8 @@
 package top.lking.db.dao.loveqq;
 
+import top.lking.bean.Page;
 import top.lking.bean.User;
+import top.lking.db.interfaces.LoveQQDBControlInterface;
 import top.lking.db.interfaces.UserDaoInterface;
 import top.lking.db.utils.LoveQQDBUtils;
 import top.lking.utils.R;
@@ -9,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,7 @@ import java.util.List;
  * @describe:
  */
 public class UserDao implements UserDaoInterface {
-    /**
-     *
-     * @author Jason
-     * @date 5:29 PM 4/19/2020
-     * @param  user 用户实体类
-     * @return true:成功 false:失败
-     */
+
     public boolean addUser(User user) throws SQLException {
 
         //获取数据库连接
@@ -43,13 +38,7 @@ public class UserDao implements UserDaoInterface {
             return false;
         return true;
     }
-    /**
-     * 用户删除
-     * @author Jason
-     * @date 5:29 PM 4/19/2020
-     * @param  id 用户标识
-     * @return true:成功 false:失败
-     */
+
     public boolean delUser(int id) throws SQLException {
         Connection connection=LoveQQDBUtils.getCon();
         PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_DEL_USER_SQL);
@@ -64,32 +53,28 @@ public class UserDao implements UserDaoInterface {
         return false;
     }
 
-    public List<User> queryAll() throws SQLException {
-        List<User> list=new ArrayList<User>();
-        Connection connection=LoveQQDBUtils.getCon();
-        Statement statement=connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(R.LoveQQSQLConfig.QUERY_ALL_USER_SQL);
-        while(resultSet.next()){
-            User user=new User();
-            user.setUser_id(resultSet.getInt(R.LoveQQSQLConfig.USER_ID));
-            user.setUser_login(resultSet.getString(R.LoveQQSQLConfig.USER_LOGIN));
-            user.setUser_pass(resultSet.getString(R.LoveQQSQLConfig.USER_PASS));
-            user.setUser_register_time(resultSet.getTimestamp(R.LoveQQSQLConfig.USER_REGISTER_TIME).toString());
-            list.add(user);
-        }
-        resultSet.close();
-        statement.close();
-        return list;
-    }
 
     @Override
-    public List<User> queryAll(String snapshot) throws SQLException {
+    public Page queryAll(String snippet, int currentPageCount) throws SQLException {
+        Page page=new Page();
         List<User> list=new ArrayList<User>();
         Connection connection=LoveQQDBUtils.getCon();
-       PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.LIMIT_QUERY_ALL_USER_SQL);
-       preparedStatement.setString(1,"%"+snapshot+"%");
+        //用来计算数据总量
+        PreparedStatement totalCountPreparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_LIMIT_QUERY_ALL_USER_COUNT_SQL);
+        totalCountPreparedStatement.setString(1,"%"+snippet+"%");
+        ResultSet totalResultSet=totalCountPreparedStatement.executeQuery();
+        if(totalResultSet.next()){
+            page.setTotalData(totalResultSet.getInt(1));
+        }
+        totalResultSet.close();
+        totalCountPreparedStatement.close();
+        //用来查询数据
+        PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_LIMIT_QUERY_ALL_USER_SQL);
+        preparedStatement.setString(1,"%"+snippet+"%");
+        preparedStatement.setInt(2,(currentPageCount-1)* LoveQQDBControlInterface.SHOW_PAGE_PAGINATION_COUNT);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
+
             User user=new User();
             user.setUser_id(resultSet.getInt(R.LoveQQSQLConfig.USER_ID));
             user.setUser_login(resultSet.getString(R.LoveQQSQLConfig.USER_LOGIN));
@@ -99,7 +84,9 @@ public class UserDao implements UserDaoInterface {
         }
         resultSet.close();
         preparedStatement.close();
-        return list;
+
+        page.setCurrentPageData(list);
+        return page;
     }
 
     public User queryUser(String userName) throws SQLException {
@@ -119,14 +106,20 @@ public class UserDao implements UserDaoInterface {
 
         return user;
     }
-    //Test
+    /**
+     * 开发测试
+     * @author Jason
+     * @date 4:19 PM 4/23/2020
+     * @param
+     * @return
+     */
     public static void main(String[] args)  {
         UserDao userDao=new UserDao();
         User user=new User();
         user.setUser_login("woai1");
         user.setUser_pass("123");
         try {
-            System.out.println(userDao.queryAll());;
+            System.out.println(userDao.queryAll("",1));;
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

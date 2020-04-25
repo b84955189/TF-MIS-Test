@@ -26,48 +26,46 @@ public class LoginDealServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            //编码
-            request.setCharacterEncoding("UTF-8");
+            User user=null;
             String userName=null;
             String password=null;
             LoveQQDBControl loveQQDBControl=new LoveQQDBControl();
-            //判断是否已经登录
-            if(request.getSession(true).getAttribute("online")!=null){
-                request.getSession(true).removeAttribute(R.MesString.DATA_KEY);
-            }else{
+
                 //判断用户名或密码是否正确
                 userName=request.getParameter(R.LoveQQSQLConfig.USER_LOGIN);
                 password=request.getParameter(R.LoveQQSQLConfig.USER_PASS);
                 //输入错误
                 if(userName==null||password==null||userName.trim().equals("")||password.trim().equals("")){
                     request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.NULL_ERROR_MEG_VALUE);
-                    response.sendRedirect(request.getContextPath());
+                    response.sendRedirect(request.getContextPath()+R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
                     return;
                 }
-                User user=(User) (loveQQDBControl.query(userName, LoveQQDBControlInterface.LOVE_QQ_USER_TABLE));
+                user=(User) (loveQQDBControl.query(userName, LoveQQDBControlInterface.LOVE_QQ_USER_TABLE));
                 //用户不存在
                 if(user==null){
+                    //设置错误信息
                     request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.ACCOUNT_ERROR_MEG_VALUE);
-                    response.sendRedirect(request.getContextPath());
+                    //返回登录界面
+                    response.sendRedirect(request.getContextPath()+R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
                     return;
                 }
                 //密码错误
                 if(!user.getUser_pass().equals(password)){
+                    //设置错误信息
                     request.getSession(true).setAttribute(R.MesString.MSG_KEY,R.MesString.PASSWORD_ERROR_MEG_VALUE);
-                    response.sendRedirect(request.getContextPath());
+                    //返回登录界面
+                    response.sendRedirect(request.getContextPath()+R.FilterDefaultParamValue.DEFAULT_REDIRECT_PAGE);
                     return;
                 }
-            }
+
 
 
 
             //标记登录
-            request.getSession(true).setAttribute("online","1");
-            //将数据填充至session
-            List<User> list=loveQQDBControl.queryAll(LoveQQDBControlInterface.LOVE_QQ_USER_TABLE);
-            request.getSession(true).setAttribute(R.MesString.DATA_KEY,list);
-            //转发至展示页
-            response.sendRedirect(request.getContextPath()+"/show.jsp");
+            request.getSession(true).setAttribute(R.SessionParamName.USER,user);
+            //Test
+            //转发至搜索模块
+            request.getRequestDispatcher(request.getContextPath()+R.ServletNames.SEARCH_SERVLET).forward(request,response);
 
     }
 }

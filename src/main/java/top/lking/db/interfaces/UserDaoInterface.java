@@ -1,11 +1,13 @@
 package top.lking.db.interfaces;
 
+import top.lking.bean.Page;
 import top.lking.bean.User;
 
 import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * JDBC数据访问层接口
  * @author Jason
  * @version 1.0
  * @date 4/7/2020 10:38 AM
@@ -38,24 +40,17 @@ public interface UserDaoInterface {
     * @return true:成功 false:失败
     */
     public boolean updateUser(User newUser);
-    /**
-     * 总体用户信息查询
-     * @author Jason
-     * @date 5:32 PM 4/19/2020
-     * @param
-     * @return 返回用户信息集合
-     * @throws SQLException
-     */
-    public List<User> queryAll() throws SQLException;
+
     /**
      * 模糊查询用户信息
      * @author Jason
      * @date 5:33 PM 4/19/2020
-     * @param  snapshot
-     * @return 返回用户信息集合
+     * @param snippet 查询片段
+     * @param currentPageCount 当前页码
+     * @return 返回页面数据对象
      * @throws SQLException
      */
-    public List<User> queryAll(String snapshot) throws SQLException;
+    public Page queryAll(String snippet, int currentPageCount) throws SQLException;
     /**
      * 单个用户信息查询
      * @author Jason
