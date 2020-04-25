@@ -34,8 +34,10 @@ public class TestSearchServlet extends HttpServlet {
 
         //绑定数据
         request.setAttribute(R.RequestParamName.CURRENT_DATA,page);
-        //转发至展示页
-        request.getRequestDispatcher(request.getContextPath()+R.FrontPageNames.SHOW_PAGE).forward(request,response);
+        //转发至展示页---注意在服务器内部调用的路径与浏览器调用的路径问题--下面注释掉的，在服务器里是错误的，注意理解！！！之所以要加contextPath，是为了前端找资源的。
+//        request.getRequestDispatcher(request.getContextPath()+R.FrontPageNames.SHOW_PAGE).forward(request,response);
+          request.getRequestDispatcher(R.FrontPageNames.SHOW_PAGE).forward(request,response);
+
     }
 
     @Override

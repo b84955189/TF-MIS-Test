@@ -13,8 +13,9 @@
 </head>
 <body>
     <div class="container">
-        <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
-
+        <%--        注意在服务器内部调用的路径与浏览器调用的路径问题--下面注释掉的，在服务器里是错误的，注意理解！！！--%>
+<%--        <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>--%>
+            <jsp:include page="<%=R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="form-group">
                 <div class="form-row">

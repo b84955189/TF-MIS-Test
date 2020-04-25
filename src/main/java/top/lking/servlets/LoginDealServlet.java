@@ -64,8 +64,9 @@ public class LoginDealServlet extends HttpServlet {
             //标记登录
             request.getSession(true).setAttribute(R.SessionParamName.USER,user);
             //Test
-            //转发至搜索模块
-            request.getRequestDispatcher(request.getContextPath()+R.ServletNames.SEARCH_SERVLET).forward(request,response);
+            //转发至搜索模块---------------注意在服务器内部调用的路径与浏览器调用的路径问题--下面注释掉的，在服务器里是错误的，注意理解！！！
+//            request.getRequestDispatcher(request.getContextPath()+R.ServletNames.SEARCH_SERVLET).forward(request,response);
+            request.getRequestDispatcher(R.ServletNames.SEARCH_SERVLET).forward(request,response);
 
     }
 }
