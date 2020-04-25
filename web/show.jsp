@@ -8,7 +8,6 @@
     response.setHeader("Pragma","No-cache");
     response.setHeader("Cache-Control","no-cache");
     response.setDateHeader("Expires", -10);
-
 %>
 <html lang="zh-cn">
 <head>
@@ -25,7 +24,9 @@
 <body>
 
     <div class="container">
-     <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
+        <%--        注意在服务器内部调用的路径与浏览器调用的路径问题--下面注释掉的，在服务器里是错误的，注意理解！！！--%>
+<%--     <jsp:include page="<%=request.getContextPath()+R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>--%>
+     <jsp:include page="<%=R.FrontPageNames.TOP_PAGE%>" flush="true"></jsp:include>
         <a href="<%=request.getContextPath()+R.ServletNames.LOGOUT_SERVLET%>"><button class="btn badge-danger">注销</button></a>
 
         <table class="table table-hover table-bordered">
