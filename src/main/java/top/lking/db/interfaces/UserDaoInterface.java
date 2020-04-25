@@ -1,5 +1,6 @@
 package top.lking.db.interfaces;
 
+import top.lking.bean.Page;
 import top.lking.bean.User;
 
 import java.sql.SQLException;
@@ -44,11 +45,12 @@ public interface UserDaoInterface {
      * 模糊查询用户信息
      * @author Jason
      * @date 5:33 PM 4/19/2020
-     * @param  snapshot
-     * @return 返回用户信息集合
+     * @param snippet 查询片段
+     * @param currentPageCount 当前页码
+     * @return 返回页面数据对象
      * @throws SQLException
      */
-    public List<User> queryAll(String snapshot) throws SQLException;
+    public Page queryAll(String snippet, int currentPageCount) throws SQLException;
     /**
      * 单个用户信息查询
      * @author Jason

@@ -1,5 +1,6 @@
 package top.lking.db.interfaces;
 
+import top.lking.bean.Page;
 import top.lking.bean.User;
 
 import java.util.List;
@@ -12,6 +13,12 @@ import java.util.List;
  */
 public interface LoveQQDBControlInterface {
     public int LOVE_QQ_USER_TABLE=111;
+    /**
+     * 规定每页显示多少条数据（分页）
+     * @author Jason
+     * @date 3:30 PM 4/25/2020
+     */
+    public int SHOW_PAGE_PAGINATION_COUNT=4;
      /**
       * 添加操作
       * @author Jason
@@ -36,7 +43,27 @@ public interface LoveQQDBControlInterface {
     * @date 4:36 PM 4/23/2020
     * @param  userName 数据标识
     * @param sign 数据表标识
-    * @return
+    * @return 返回查询对象
     */
     public Object query(String userName,int sign);
+    /**
+     * 模糊查询
+     * @author Jason
+     * @date 3:37 PM 4/25/2020
+     * @param sign 查询标记
+     * @param snippet 查询片段
+     * @param currentPageCount 当前页码
+     * @return 返回页面数据对象
+     */
+    public Page queryAll(int sign,String snippet,int currentPageCount);
+    /**
+     * 分页查询
+     * @author Jason
+     * @date 3:45 PM 4/25/2020
+     * @param sign 查询标记
+     * @param snippet 查询片段
+     * @param currentPageCount 当前页码
+     * @return 返回分页查询集合
+     */
+    public Page paginationQuery(int sign,String snippet,String currentPageCount);
 }

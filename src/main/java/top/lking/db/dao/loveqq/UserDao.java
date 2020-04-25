@@ -1,6 +1,8 @@
 package top.lking.db.dao.loveqq;
 
+import top.lking.bean.Page;
 import top.lking.bean.User;
+import top.lking.db.interfaces.LoveQQDBControlInterface;
 import top.lking.db.interfaces.UserDaoInterface;
 import top.lking.db.utils.LoveQQDBUtils;
 import top.lking.utils.R;
@@ -9,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +55,23 @@ public class UserDao implements UserDaoInterface {
 
 
     @Override
-    public List<User> queryAll(String snapshot) throws SQLException {
+    public Page queryAll(String snippet, int currentPageCount) throws SQLException {
+        Page page=new Page();
         List<User> list=new ArrayList<User>();
         Connection connection=LoveQQDBUtils.getCon();
-       PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.LIMIT_QUERY_ALL_USER_SQL);
-       preparedStatement.setString(1,"%"+snapshot+"%");
+        //用来计算数据总量
+        PreparedStatement totalCountPreparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_LIMIT_QUERY_ALL_USER_COUNT_SQL);
+        totalCountPreparedStatement.setString(1,"%"+snippet+"%");
+        ResultSet totalResultSet=totalCountPreparedStatement.executeQuery();
+        if(totalResultSet.next()){
+            page.setTotalData(totalResultSet.getInt(1));
+        }
+        totalResultSet.close();
+        totalCountPreparedStatement.close();
+        //用来查询数据
+        PreparedStatement preparedStatement=connection.prepareStatement(R.LoveQQSQLConfig.PRE_LIMIT_QUERY_ALL_USER_SQL);
+        preparedStatement.setString(1,"%"+snippet+"%");
+        preparedStatement.setInt(2,(currentPageCount-1)* LoveQQDBControlInterface.SHOW_PAGE_PAGINATION_COUNT);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
 
@@ -71,7 +84,9 @@ public class UserDao implements UserDaoInterface {
         }
         resultSet.close();
         preparedStatement.close();
-        return list;
+
+        page.setCurrentPageData(list);
+        return page;
     }
 
     public User queryUser(String userName) throws SQLException {
@@ -104,7 +119,7 @@ public class UserDao implements UserDaoInterface {
         user.setUser_login("woai1");
         user.setUser_pass("123");
         try {
-            System.out.println(userDao.queryAll(""));;
+            System.out.println(userDao.queryAll("",1));;
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

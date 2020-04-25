@@ -1,12 +1,17 @@
 package top.lking.utils;
 
+import lombok.Data;
+import top.lking.db.interfaces.LoveQQDBControlInterface;
+
 /**
  * 项目全局资源引用类
  * @author Jason
  * @version 1.0
  * @date 4/7/2020 9:54 AM
  */
+
 public class R {
+
 
     public interface LoveQQSQLConfig{
         //Config
@@ -25,8 +30,8 @@ public class R {
         String PRE_ADD_USER_SQL="INSERT INTO lq_users("+USER_LOGIN+","+USER_PASS+") VALUES(?,?)";
         String PRE_QUERY_USER_SQL="SELECT * FROM "+LQ_USERS+" WHERE "+USER_LOGIN+"=?";
         String PRE_DEL_USER_SQL="DELETE FROM "+LQ_USERS+" WHERE "+USER_ID+" =?";
-        String QUERY_ALL_USER_SQL="SELECT * FROM "+LQ_USERS;
-        String LIMIT_QUERY_ALL_USER_SQL="SELECT * FROM "+LQ_USERS+" WHERE "+USER_LOGIN+" LIKE ?";
+        String PRE_LIMIT_QUERY_ALL_USER_COUNT_SQL ="SELECT COUNT(*) FROM "+LQ_USERS+" WHERE "+USER_LOGIN+" LIKE ? ";
+        String PRE_LIMIT_QUERY_ALL_USER_SQL ="SELECT * FROM "+LQ_USERS+" WHERE "+USER_LOGIN+" LIKE ? "+"LIMIT ?,"+ LoveQQDBControlInterface.SHOW_PAGE_PAGINATION_COUNT;
     }
 
     public interface MesString{
@@ -40,7 +45,12 @@ public class R {
     }
     public interface SessionParamName{
         String USER="user";
-        String DATA_KEY="data";
+    }
+    public interface RequestParamName{
+        String GLOBAL_RESOURCE="Resource";
+        String TYPE_USER_LOGIN="type_user_login";
+        String PAGE_COUNT ="page";
+        String CURRENT_DATA="page_data";
     }
     /**
      * 全局过滤器参数名称

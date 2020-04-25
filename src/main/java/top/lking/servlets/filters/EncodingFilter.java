@@ -39,6 +39,9 @@ public class EncodingFilter implements Filter {
         servletRequest.setCharacterEncoding(encoding!=null?encoding:R.FilterDefaultParamValue.DEFAULT_ENCODING);
         servletResponse.setContentType(contentType!=null?contentType:R.FilterDefaultParamValue.DEFAULT_CONTENT_TYPE);
 
+        //绑定全局资源引用类对象
+        //servletRequest.setAttribute(R.RequestParamName.GLOBAL_RESOURCE,new R());
+
         //Test
         System.out.println("EncodingFilter执行了！");
 
